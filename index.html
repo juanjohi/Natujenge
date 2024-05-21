@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SMS SENDER</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <section class="contact">
+        <div class="text-form">
+            <div class="title">
+                <h2>Pssst You... yes You!</h2>
+                <p class="text">Slide me a text</p>
+            </div>
+
+            <div class="drop-down">
+                <label for="source">Choose a source
+                    Address</label>
+                <label for="from">From: </label><br>
+                <select name="from" id="from">
+                    <option value="CONNECT">CONNECT</option>
+                    <option value="TIARACONECT">TIARACONECT</option>
+                </select>
+            </div>
+
+
+            <div class="row">
+                <div class="contact-left">
+                    <form>
+                        <input type="text" name="number" placeholder="Number" id="to" value="254707744908">
+                        <input placeholder="Message" name="message" type="text" id="messageField" value="hello">
+                        <input type="button" value="Submit" onclick="sendSMS()" class="submit-btn">
+                    </form>
+
+                    <p id="request"></p>
+
+                    <p id="response"></p>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+<script src="index.js"></script>
+</body>
+
+</html>
