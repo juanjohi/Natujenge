@@ -1,4 +1,16 @@
+function showToast(message) {
+    const toastContainer = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast show';
+    toast.innerText = message;
+    toastContainer.appendChild(toast);
 
+    // Remove the toast after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toastContainer.removeChild(toast);
+    }, 3000);
+}
 
 function sendSMS() {
 
@@ -23,11 +35,14 @@ function sendSMS() {
             'Authorization': `Bearer ${apiKey}`
         }
 
-    }).then(function (response) {
-        return response.text();
-    }).then(function (text) {
-        console.log(text);
-    }).catch(function (error) {
-        console.log(error);
     })
+        .then(function (response) {
+            return response.json(); 
+        }).then(function (text) {
+            showToast(text.status || "Message sent successfully");
+            console.log(text);
+        }).catch(function (error) {
+            showToast("Error: " + error.message);
+        });
 }
+

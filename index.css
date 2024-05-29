@@ -1,14 +1,13 @@
-
 .text-form {
     max-width: 480px;
     margin: 5rem auto;
     padding: 0 4rem;
     border: #c5cac0 solid;
     border-radius: 25px;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-.title{
+.title {
     text-align: center;
 }
 
@@ -20,13 +19,13 @@
     padding: 1rem 0;
 }
 
- label{
+label {
     font-size: 1rem;
     padding: 5rem 0;
 }
 
-.drop-down{
-    padding-top:1rem;
+.drop-down {
+    padding-top: 1rem;
 }
 
 .contact-left form input,
@@ -66,4 +65,50 @@
 
 .submit-btn:hover {
     background: #000000;
+}
+
+#toast-container {
+    text-align: center;
+    font-family: 'Lucida Sans',
+        'Lucida Sans Regular',
+        'Lucida Grande',
+        'Lucida Sans Unicode',
+        Geneva,
+        Verdana,
+        sans-serif;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+}
+
+.toast {
+    display: none;
+    min-width: 200px;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: #000000;
+    background-color: #ffffff;
+    border-radius: 25px;
+    font-weight: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.toast.show {
+    display: block;
+    animation: fadeInOut 3s;
+}
+
+@keyframes fadeInOut {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    10%,
+    90% {
+        opacity: 1;
+    }
 }
