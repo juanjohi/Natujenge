@@ -1,6 +1,6 @@
 const display = document.getElementById('display');
 
-function appendCharacter(char) {
+function chukuaCharacter(char) {
     display.value += char;
 }
 
@@ -8,12 +8,18 @@ function clearDisplay() {
     display.value = '';
 }
 
+function demo() {
+    display.value = 'Natujenge'
+    
+}
+
+
 async function calculate() {
     const expression = display.value;
     try {
         const response = await fetch('http://localhost:5500/calculate', {
             method: 'POST',
-            mode:'cors',
+            mode: 'cors',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -27,8 +33,20 @@ async function calculate() {
             throw new Error(responseData.error || 'Unknown error occurred');
         }
     } catch (error) {
-        console.error(error);
+        console.log(error);
         display.value = 'Error calculating';
     }
 }
+
+
+document.addEventListener('keydown', event => {
+    const key = event.key
+    if (key.length === 1 && /[0-9+\-*=]/.test(key)) {
+        chukuaCharacter(key)
+    } else if (key === 'Enter') {
+        calculate()
+    } else if (key === 'Escape') {
+        clearDisplay()
+    }
+})
 
