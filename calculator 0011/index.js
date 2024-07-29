@@ -50,3 +50,15 @@ document.addEventListener('keydown', event => {
         clearDisplay()
     }
 })
+
+
+document.addEventListener('keydown', event => {
+    const key = event.key
+    if (key.length === 1 && /[0-9+\-*=]/.test(key)) {
+        chukuaCharacter(key)
+    } else if (key === 'Enter') {
+        calculate()
+    } else if (key === 'Escape') {
+        clearDisplay()
+    }
+})
