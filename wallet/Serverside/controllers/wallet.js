@@ -42,20 +42,20 @@ const register = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
-    const { email, name, password, phonenumber } = req.body
+    const { email, name, password } = req.body
 
-    if (!email || !name || !password || !phonenumber) {
+    if (!email || !name || !password ) {
         return ("Please enter all values")
     }
 
-    const user = await Wallet.findOne({ _id: req.user.userId })
+    const user = await Wallet.findOneAndUpdate(req.userId)
     user.name = name,
         user.email = email,
         user.password = password,
-        user.phonenumber = phonenumber
 
     await user.save()
-    const token = createJWT()
+
+    const token = user.createJWT()
     res.status(StatusCodes.OK).json({
         user: {
             name: user.name,
