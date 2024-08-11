@@ -122,14 +122,14 @@ depoForm.addEventListener('submit', (e) => {
 
     function credit(deposit) {
       fetch('http://localhost:3000/api/v1/transaction/deposit', {
-        mode: 'no-cors',
+        mode: 'cors',
         method: 'POST',
         headers: {
           'Content-Type':'application/json',
-          'Authorization': `Bearer ${token}`
+          'Authorization' : `Bearer ${token}`
 
         },
-        body: JSON.stringify(deposit)
+        body: JSON.stringify({deposit})
       })
         .then(response => response.json())
         .then(data => {
