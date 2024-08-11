@@ -5,7 +5,7 @@ const { deposit, transfer, getBal, statement } = require('../controllers/twallet
 const router = express.Router()
 
 
-router.post('/deposit', deposit,transfer)
+router.post('/deposit', deposit)
 router.post('/transfer', transfer)
 router.get('/balance', getBal)
 router.get('/statement', statement)

@@ -2,32 +2,8 @@
 const { StatusCodes } = require('http-status-codes')
 const Transactions = require('../models/twallet')
 const User = require('../models/wallet')
+const smsNotify = require('../services/sms')
 require('dotenv').config()
-
-const smsNotify = async (to, message) => {
-
-    var apiUrl = process.env.TIARA_URI
-    var apiKey = process.env.TIARA_KEY
-    var connection = "TIARACONECT"
-    const timestamps = new Date().toLocaleString()
-
-    const formData = {
-        from: connection,
-        message: `${message} on ${timestamps}`,
-        to: to,
-    }
-
-    fetch(apiUrl, {
-        mode: 'cors',
-        method: 'POST',
-        body: JSON.stringify(formData),
-        headers: {
-            "Content-type": "application/json",
-            "Authorization": `Bearer ${apiKey}`
-        }
-    })
-
-}
 
 
 const deposit = async (req, res) => {
@@ -139,6 +115,9 @@ const statement = async (req, res) => {
         date: i.date
     }))
 
+    const cleanData = `Amount: ${formattedData.amount }, Type:${formattedData.type}, Date: ${formattedData.date}`
+
+    await smsNotify(user.phonenumber, `Here is your requested ministatement ${cleanData}`)
     res.status(StatusCodes.OK).json({
         transaction: {
             formattedData

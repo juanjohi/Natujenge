@@ -1,0 +1,366 @@
+body {
+    color: black;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+
+html {
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+}
+
+.btn {
+    cursor: pointer;
+    outline: 0;
+    background: transparent;
+}
+
+.nav {
+    background-color: antiquewhite;
+    color: #fff;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgb(255, 226, 62);
+}
+
+.nav .logo {
+    height: 50px;
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav ul li {
+    margin-left: 20px;
+}
+
+.nav ul li a {
+    color: #f1c40f;
+    font-size: 12px;
+    background-color: #000000;
+    text-decoration: none;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+}
+
+.nav ul li a:hover {
+    background-color: #f1c40f;
+    color: #111;
+}
+
+.nav .hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.header {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('./images/hero.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.hero {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #f1c40f;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.hero .btn {
+    padding: 12px 30px;
+    background-color: #111;
+    color: #f1c40f;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero .btn:hover {
+    background-color: #d4ac0d;
+    color: #111;
+}
+
+
+.about {
+    background-image: url('./images/wave.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.about-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.text-content {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.text-content h3 {
+    color: #f1c40f;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.text-content p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.image-content {
+    flex: 1;
+}
+
+.image-content img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+
+.transactions {
+    background-color: #111;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.transactions h3 {
+    color: #f1c40f;
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.transaction-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.transaction-item {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.transaction-item h4 {
+    color: #f1c40f;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.transaction-item p {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.transaction-item .btn {
+    padding: 10px 20px;
+    background-color: #f1c40f;
+    color: #111;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.transaction-item .btn:hover {
+    background-color: #d4ac0d;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+.modal-content {
+    background-color: #222;
+    color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 200px;
+}
+
+.close {
+    color: #f1c40f;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.modal-content input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+}
+
+.modal-content button {
+    padding: 12px;
+    background-color: #f1c40f;
+    border: none;
+    border-radius: 4px;
+    color: #111;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #d4ac0d;
+}
+
+
+.footer {
+    background-color: #222;
+    color: #f1c40f;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-links li {
+    display: inline;
+}
+
+.footer-links a {
+    color: #f1c40f;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+
+@media (max-width: 768px) {
+    .nav ul {
+        display: none;
+        flex-direction: column;
+        background-color: #222;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+    }
+
+    .nav ul li {
+        margin: 0;
+        text-align: center;
+        padding: 10px 0;
+        background-color: antiquewhite;
+    }
+
+    .nav ul li a {
+        color: #000000;
+        background-color: antiquewhite;
+    }
+
+    .nav ul.show {
+        display: flex;
+    }
+
+    .nav .hamburger {
+        display: block;
+        color: #000000;
+    }
+}

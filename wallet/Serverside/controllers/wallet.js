@@ -9,7 +9,9 @@ const login = async (req, res) => {
     }
     const user = await Wallet.findOne({ email })
     if (!user) {
-        return ("Invalid credentials")
+        return res.json({
+            msg: "NO SUCH USER"
+        })
     }
     const isPasswordCorrect = user.comparePassword(password)
     if (!isPasswordCorrect) {
