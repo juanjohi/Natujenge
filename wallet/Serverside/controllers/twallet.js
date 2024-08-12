@@ -115,9 +115,10 @@ const statement = async (req, res) => {
         date: i.date
     }))
 
-    const cleanData = `Amount: ${formattedData.amount }, Type:${formattedData.type}, Date: ${formattedData.date}`
-
-    await smsNotify(user.phonenumber, `Here is your requested ministatement ${cleanData}`)
+    const cleanedData = formattedData.map(transactions =>
+        `Amount: ${transactions.amount}, Type: ${transactions.type}, Date: ${transactions.date}`
+    )
+    await smsNotify(user.phonenumber, `Here is your requested ministatement ${cleanedData}`)
     res.status(StatusCodes.OK).json({
         transaction: {
             formattedData

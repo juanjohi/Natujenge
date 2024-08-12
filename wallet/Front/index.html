@@ -66,10 +66,10 @@
         <p>Transfer funds quickly and effortlessly.</p>
         <button class="btn">Transfer Funds</button>
       </div>
-      <div class="transaction-item">
+      <div class="transaction-item" id="statement">
         <h4>Get Your Statement</h4>
         <p>Get your transaction statements.</p>
-        <button class="btn">Get Statement</button>
+        <button class="btn" type="button">Get Statement</button>
       </div>
     </div>
   </section>
@@ -86,7 +86,7 @@
   <div class="modal-content">
     <span class="close" id="close-deposit">&times;</span>
     <div class="error" id="deposit-error" style="display: none">
-      Invalid email or password
+      Error in your deposit
     </div>
     <h2>Deposit Funds</h2>
     <form id="deposit-form">
@@ -101,6 +101,9 @@
 <div id="transfer-modal" class="modal">
   <div class="modal-content">
     <span class="close" id="close-transfer">&times;</span>
+     <div class="error" id="transfer-error" style="display: none">
+      Error in your deposit
+    </div>
     <h2>Transfer Funds</h2>
     <form id="transfer-form">
       <label for="recipient-number">Recipient Number</label>
@@ -113,7 +116,7 @@
 </div>
 
 
-  <script src="./index.js" defer></script>
+  <script src="./index.js" ></script>
 </body>
 
 </html>

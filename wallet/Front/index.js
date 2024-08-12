@@ -54,19 +54,45 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function logout() {
+document.addEventListener("DOMContentLoaded", () => {
+  const registerForm = document.getElementById('register-form')
+  const registerError = document.getElementById('register-error');
 
-  localStorage.removeItem('token');
+  registerForm.addEventListener('submit', function (e) {
+    e.preventDefault()
+    const name = document.getElementById('username').value
+    const email = document.getElementById('email').value
+    const phonenumber = document.getElementById('phonenumber').value
+    const password = document.getElementById('password').value
 
+    register(name, email, phonenumber, password)
+  })
 
-  window.location.href = 'login.html';
-
-  if (myAccountLink) myAccountLink.style.display = 'none';
-  if (transactionsSection) transactionsSection.style.display = 'none';
-  if (logoutLink) logoutLink.style.display = 'none';
-  if (loginLink) loginLink.style.display = 'block';
-  if (signupLink) signupLink.style.display = 'block';
-}
+  function register(name, email, phonenumber, password){
+    fetch('http://localhost:3000/api/v1/auth/register', {
+      mode: 'cors',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({name, email, phonenumber, password}),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        if (data) {
+          window.location.href = 'http://127.0.0.1:5500/Front/login.html';
+        } else {
+          loginError.style.display = 'block';
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        registerError.style.display = 'block';
+      });
+  }
+  
+})
 
 document.addEventListener("DOMContentLoaded", () => {
   const hamburgerMenu = document.getElementById('hamburger-menu');
@@ -113,28 +139,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-depoForm.addEventListener('submit', (e) => {
+  depoForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const deposit = document.getElementById('deposit-amount').value;
     const depositError = document.getElementById('deposit-error')
     const token = localStorage.getItem('token')
-    credit(deposit)
 
-    function credit(deposit) {
+    const formData = {
+      amount: deposit
+    }
+    credit(formData)
+
+    function credit(formData) {
       fetch('http://localhost:3000/api/v1/transaction/deposit', {
         mode: 'cors',
         method: 'POST',
         headers: {
-          'Content-Type':'application/json',
-          'Authorization' : `Bearer ${token}`
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
 
         },
-        body: JSON.stringify({deposit})
+        body: JSON.stringify(formData)
       })
         .then(response => response.json())
         .then(data => {
           console.log(data)
-          if(data){
+          if (data) {
             window.location.href = 'http://127.0.0.1:5500/Front/index.html';
           } else {
             depositError.style.display = 'block'
@@ -148,10 +178,92 @@ depoForm.addEventListener('submit', (e) => {
 
   document.getElementById('transfer-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log('Recipient number:', document.getElementById('recipient-number').value);
-    console.log('Transfer amount:', document.getElementById('transfer-amount').value);
-    transferModal.style.display = 'none';
-  });
+    const recipient = document.getElementById('recipient-number').value
+    const amount = document.getElementById('transfer-amount').value
+    const token = localStorage.getItem('token')
+    const transferError = document.getElementById('transfer-error')
 
+    const formData = {
+      number: recipient,
+      amount: amount
+    }
+
+    debit(formData)
+
+    function debit(formData) {
+      fetch('http://localhost:3000/api/v1/transaction/transfer', {
+        mode: 'cors',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+
+        },
+        body: JSON.stringify(formData)
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          if (data) {
+            window.location.href = 'http://127.0.0.1:5500/Front/index.html'
+          } else {
+            transferError.style.display = 'block'
+          }
+        })
+    }
+    transferModal.style.display = 'none';
+  })
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const statement = document.getElementById('statement')
+ 
+
+  statement.addEventListener('click', function (e) {
+    e.preventDefault()
+    const token = localStorage.getItem('token')
+    statements()
+
+    function statements() {
+      fetch('http://localhost:3000/api/v1/transaction/statement', {
+        mode: 'cors',
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization' :`Bearer ${token}`
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          if (data) {
+            window.location.href = 'http://127.0.0.1:5500/Front/index.html';
+          } else {
+            loginError.style.display = 'block';
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          registerError.style.display = 'block';
+        });
+    }
+  })
+
+ 
+  
+})
+
+function logout() {
+
+  localStorage.removeItem('token');
+
+
+  window.location.href = 'login.html';
+
+  if (myAccountLink) myAccountLink.style.display = 'none';
+  if (transactionsSection) transactionsSection.style.display = 'none';
+  if (logoutLink) logoutLink.style.display = 'none';
+  if (loginLink) loginLink.style.display = 'block';
+  if (signupLink) signupLink.style.display = 'block';
+}
 
