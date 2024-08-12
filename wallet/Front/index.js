@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
       body: JSON.stringify({ email, password }),
     })
       .then(response => response.json())
-      .then(data => {
+      .then((data,) => {
         if (data.user.token) {
           localStorage.setItem('token', data.user.token);
           window.location.href = 'http://127.0.0.1:5500/Front/index.html';
@@ -78,10 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
       body: JSON.stringify({name, email, phonenumber, password}),
     })
       .then(response => response.json())
-      .then(data => {
+      .then((data, text) => {
         console.log(data)
         if (data) {
           window.location.href = 'http://127.0.0.1:5500/Front/login.html';
+          showToast(text.status ||  "success");
         } else {
           loginError.style.display = 'block';
         }
@@ -162,10 +163,11 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(formData)
       })
         .then(response => response.json())
-        .then(data => {
+        .then((data, text) => {
           console.log(data)
           if (data) {
             window.location.href = 'http://127.0.0.1:5500/Front/index.html';
+            showToast(text.status ||  "success");
           } else {
             depositError.style.display = 'block'
           }
@@ -202,10 +204,11 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(formData)
       })
         .then(response => response.json())
-        .then(data => {
+        .then((data, text) => {
           console.log(data)
           if (data) {
             window.location.href = 'http://127.0.0.1:5500/Front/index.html'
+            showToast(text.status ||  "success");
           } else {
             transferError.style.display = 'block'
           }
@@ -234,10 +237,10 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       })
         .then(response => response.json())
-        .then(data => {
-          console.log(data)
+        .then((data, text) => {
           if (data) {
             window.location.href = 'http://127.0.0.1:5500/Front/index.html';
+            showToast(text.status ||  "success");
           } else {
             loginError.style.display = 'block';
           }
@@ -252,6 +255,19 @@ document.addEventListener("DOMContentLoaded", () => {
  
   
 })
+
+function showToast(message) {
+  const toastContainer = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = 'toast show';
+  toast.innerText = message;
+  toastContainer.appendChild(toast);
+
+  setTimeout(() => {
+      toast.classList.remove('show');
+      toastContainer.removeChild(toast);
+  }, 3000);
+}
 
 function logout() {
 
